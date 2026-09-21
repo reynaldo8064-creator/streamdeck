@@ -1,0 +1,124 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = int;
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ProgramId = nat;
+type Program = 
+ record {
+   channelId: ChannelId;
+   description: text;
+   endTime: Timestamp;
+   id: ProgramId;
+   startTime: Timestamp;
+   title: text;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type ChannelSort = 
+ variant {
+   name;
+   popularity;
+ };
+type ChannelId = nat;
+type ChannelDetail = 
+ record {
+   channel: Channel;
+   nowPlaying: opt Program;
+   upNext: opt Program;
+ };
+type Channel = 
+ record {
+   category: Category;
+   description: text;
+   id: ChannelId;
+   isLive: bool;
+   logoUrl: text;
+   name: text;
+   popularity: nat;
+   streamUrl: text;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type Category = 
+ variant {
+   documentary;
+   kids;
+   movies;
+   music;
+   news;
+   sports;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  /// Add a channel to the caller's favorites. Requires a signed-in caller.
+  addFavorite: (channelId: ChannelId) -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  execute: (qJson: text) -> (Result) query;
+  /// Return the backend API documentation as Markdown.
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// Get a single channel by id.
+  getChannel: (id: ChannelId) -> (opt Channel) query;
+  /// Get a channel with its now-playing and up-next programs.
+  getChannelDetail: (id: ChannelId) -> (opt ChannelDetail) query;
+  isCallerAdmin: () -> (bool) query;
+  /// List every channel in the catalog.
+  listChannels: () -> (vec Channel) query;
+  /// List channels in a category, ordered by the given sort.
+  listChannelsByCategory: (category: Category, sort: ChannelSort) ->
+   (vec Channel) query;
+  /// List the caller's favorite channels. Requires a signed-in caller.
+  listFavorites: () -> (vec Channel) query;
+  /// List the programs scheduled on a channel.
+  listPrograms: (channelId: ChannelId) -> (vec Program) query;
+  /// Remove a channel from the caller's favorites. Requires a signed-in caller.
+  removeFavorite: (channelId: ChannelId) -> ();
+  schema: () -> (text) query;
+}

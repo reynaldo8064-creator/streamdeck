@@ -1,0 +1,118 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type Category__457071637 =
+  {#documentary; #kids; #movies; #music; #news; #sports};
+type Category__493886044 = Category__936342486;
+type Category__936342486 =
+  {#documentary; #kids; #movies; #music; #news; #sports};
+type ChannelId__598995129 = ChannelId__821026820;
+type ChannelId__787107449 = Nat;
+type ChannelId__821026820 = Nat;
+type Channel__136550064 =
+  {
+    category : Category__457071637;
+    description : Text;
+    id : ChannelId__787107449;
+    isLive : Bool;
+    logoUrl : Text;
+    name : Text;
+    popularity : Nat;
+    streamUrl : Text
+  };
+type Channel__302619494 =
+  {
+    category : Category__493886044;
+    description : Text;
+    id : ChannelId__598995129;
+    isLive : Bool;
+    logoUrl : Text;
+    name : Text;
+    popularity : Nat;
+    streamUrl : Text
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type List__355132335<T> =
+  {
+    var blockIndex : Nat__227979830;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__227979830
+  };
+type List__836382695<T> = List__355132335<T>;
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__193197324 =
+  {
+    accessControlState : AccessControlState__201339279;
+    channels : Map__230067015<ChannelId__787107449, Channel__136550064>;
+    favorites :
+      Map__230067015<Principal__873421814,
+                      List__836382695<ChannelId__787107449>>;
+    programs : Map__230067015<ProgramId__35536960, Program__401738352>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type Principal__224692764 = Principal;
+type Principal__873421814 = Principal__224692764;
+type ProgramId__179092187 = Nat;
+type ProgramId__35536960 = Nat;
+type ProgramId__768889471 = ProgramId__179092187;
+type Program__1000837813 =
+  {
+    channelId : ChannelId__598995129;
+    description : Text;
+    endTime : Timestamp__1023980726;
+    id : ProgramId__768889471;
+    startTime : Timestamp__1023980726;
+    title : Text
+  };
+type Program__401738352 =
+  {
+    channelId : ChannelId__787107449;
+    description : Text;
+    endTime : Timestamp__1028304436;
+    id : ProgramId__35536960;
+    startTime : Timestamp__1028304436;
+    title : Text
+  };
+type Timestamp__1023980726 = Timestamp__301639476;
+type Timestamp__1028304436 = Int;
+type Timestamp__301639476 = Int;
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "20260921_120000" : (_old : {}) -> NewActor__193197324
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable channels :
+    {
+      var root : Node__204828119<ChannelId__821026820, Channel__302619494>;
+      var size : Nat__227979830
+    };
+  stable favorites :
+    {
+      var root :
+        Node__204828119<Principal__873421814,
+                         List__836382695<ChannelId__821026820>>;
+      var size : Nat__227979830
+    };
+  stable programs :
+    {
+      var root : Node__204828119<ProgramId__179092187, Program__1000837813>;
+      var size : Nat__227979830
+    }
+};

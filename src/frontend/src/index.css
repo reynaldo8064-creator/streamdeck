@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/assets/fonts/Satoshi.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "Satoshi";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.75rem;
+
+    /* Broadcast Noir — light fallback (app is dark-first, kept AA+ for safety) */
+    --background: 0.97 0.006 255;
+    --foreground: 0.16 0.018 255;
+    --card: 1.0 0.003 255;
+    --card-foreground: 0.16 0.018 255;
+    --popover: 1.0 0.003 255;
+    --popover-foreground: 0.16 0.018 255;
+
+    --primary: 0.55 0.21 27;
+    --primary-foreground: 0.99 0.005 27;
+
+    --secondary: 0.94 0.008 255;
+    --secondary-foreground: 0.26 0.02 255;
+    --muted: 0.94 0.008 255;
+    --muted-foreground: 0.5 0.014 255;
+
+    --accent: 0.62 0.13 195;
+    --accent-foreground: 0.99 0.005 195;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.005 25;
+
+    --success: 0.58 0.16 150;
+    --success-foreground: 0.99 0.005 150;
+    --warning: 0.72 0.15 85;
+    --warning-foreground: 0.16 0.018 85;
+
+    --border: 0.9 0.008 255;
+    --input: 0.9 0.008 255;
+    --ring: 0.55 0.21 27;
+
+    --chart-1: 0.62 0.21 27;
+    --chart-2: 0.68 0.13 195;
+    --chart-3: 0.6 0.16 150;
+    --chart-4: 0.75 0.15 85;
+    --chart-5: 0.55 0.2 300;
+
+    --sidebar: 0.97 0.006 255;
+    --sidebar-foreground: 0.16 0.018 255;
+    --sidebar-primary: 0.55 0.21 27;
+    --sidebar-primary-foreground: 0.99 0.005 27;
+    --sidebar-accent: 0.94 0.008 255;
+    --sidebar-accent-foreground: 0.26 0.02 255;
+    --sidebar-border: 0.9 0.008 255;
+    --sidebar-ring: 0.55 0.21 27;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.62 0.24 27),
+      oklch(0.5 0.2 12)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.2 0.02 255 / 0.6),
+      oklch(0.14 0.018 255 / 0.9)
+    );
+    --gradient-vignette: radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      oklch(0.1 0.015 255 / 0.85) 100%
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-quick: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Broadcast Noir — primary theme: ink-blue-black surfaces, tally-light vermilion */
+    --background: 0.135 0.018 258;
+    --foreground: 0.95 0.008 255;
+    --card: 0.18 0.02 258;
+    --card-foreground: 0.95 0.008 255;
+    --popover: 0.205 0.022 258;
+    --popover-foreground: 0.95 0.008 255;
+
+    --primary: 0.62 0.24 27;
+    --primary-foreground: 0.99 0.005 27;
+
+    --secondary: 0.235 0.024 258;
+    --secondary-foreground: 0.88 0.008 255;
+    --muted: 0.235 0.024 258;
+    --muted-foreground: 0.62 0.012 255;
+
+    --accent: 0.78 0.16 195;
+    --accent-foreground: 0.14 0.018 195;
+
+    --destructive: 0.62 0.22 22;
+    --destructive-foreground: 0.98 0.005 22;
+
+    --success: 0.7 0.17 150;
+    --success-foreground: 0.14 0.018 150;
+    --warning: 0.78 0.15 85;
+    --warning-foreground: 0.14 0.018 85;
+
+    --border: 0.28 0.024 258;
+    --input: 0.3 0.024 258;
+    --ring: 0.62 0.24 27;
+
+    --chart-1: 0.62 0.24 27;
+    --chart-2: 0.78 0.16 195;
+    --chart-3: 0.7 0.17 150;
+    --chart-4: 0.78 0.15 85;
+    --chart-5: 0.65 0.22 300;
+
+    --sidebar: 0.16 0.02 258;
+    --sidebar-foreground: 0.95 0.008 255;
+    --sidebar-primary: 0.62 0.24 27;
+    --sidebar-primary-foreground: 0.99 0.005 27;
+    --sidebar-accent: 0.235 0.024 258;
+    --sidebar-accent-foreground: 0.88 0.008 255;
+    --sidebar-border: 0.28 0.024 258;
+    --sidebar-ring: 0.62 0.24 27;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.66 0.24 27),
+      oklch(0.52 0.2 10)
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.21 0.022 258 / 0.7),
+      oklch(0.135 0.018 258 / 0.95)
+    );
+    --gradient-vignette: radial-gradient(
+      ellipse at center,
+      transparent 30%,
+      oklch(0.09 0.015 258 / 0.9) 100%
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  .transition-quick {
+    transition: var(--transition-quick);
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+  .bg-vignette {
+    background-image: var(--gradient-vignette);
+  }
+  .text-gradient-primary {
+    background-image: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .label-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground;
+  }
+  .card-hover-lift {
+    transition: var(--transition-smooth);
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-4px);
+    border-color: oklch(var(--primary) / 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card-hover-lift:hover {
+    transform: none;
+  }
+}

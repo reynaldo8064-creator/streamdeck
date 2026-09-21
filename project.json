@@ -1,0 +1,19 @@
+{
+  "overview": "An IPTV channel browser with a searchable catalog of live channels, channel detail pages with program info, and per-user favorites.",
+  "features": [
+    "Browse live TV channels grouped by category",
+    "Search and filter channels by name and category",
+    "Channel detail pages with now-playing and up-next program info",
+    "Save favorite channels per signed-in user",
+    "Responsive layout for desktop and mobile"
+  ],
+  "category": "media-streaming",
+  "tags": [
+    "iptv",
+    "streaming",
+    "tv",
+    "channels",
+    "media"
+  ],
+  "last_updated": "2026-09-21T18:46:22.642Z"
+}
